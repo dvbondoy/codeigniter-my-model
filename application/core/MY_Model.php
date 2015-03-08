@@ -101,7 +101,7 @@ class MY_Model extends CI_Model {
 
         $this->db->update($this->table, $data);
 
-        return $this->db->affected_rows() > 0 ? true : false;
+        return $this->db->affected_rows() > 0 ? $id : false;
     }
 
 	/*
