@@ -86,6 +86,19 @@ class MY_Model extends CI_Model {
         return $this->db->affected_rows() > 0 ? true : false;
 	}
 
+    public function save($data = [], $id = 0)
+    {
+        if ($id == 0) {
+            //insert
+            $r = $this->insert($data);
+        } else {
+            //update
+            $r = $this->update($id, $data);
+        }
+
+        return $r;
+    }
+
     public function insert($data)
     {
         $this->db->insert($this->table, $data);
