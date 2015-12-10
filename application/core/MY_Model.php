@@ -34,7 +34,7 @@ class MY_Model extends CI_Model {
 
 		$q = $this->db->get($this->table);
 
-		return $q->row();
+		return $q;
 	}
 
 	/**
@@ -49,7 +49,7 @@ class MY_Model extends CI_Model {
 
 		$q = $this->db->get($this->table);
 
-		return $q->result();
+		return $q;
 	}
 
 	/**
@@ -69,7 +69,7 @@ class MY_Model extends CI_Model {
 
 		$q = $this->db->get($this->table);
 
-		return $q->result();
+		return $q;
 	}
 
 	/**
