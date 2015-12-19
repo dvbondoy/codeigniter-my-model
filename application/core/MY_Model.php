@@ -2,9 +2,9 @@
 
 class MY_Model extends CI_Model {
 
-	protected $table;			//table name
+	protected $TABLE;			//table name
 
-	protected $p_key = 'id';	//primary key
+	protected $PKEY = 'id';	//primary key
 	
 	public function __construct()
 	{
@@ -13,7 +13,7 @@ class MY_Model extends CI_Model {
 		$this->load->helper('inflector');
 
 		//guess table name if not set
-		if ($this->table == null) {
+		if ($this->TABLE == null) {
 			$this->_get_table();
 		}
 	}
@@ -30,9 +30,9 @@ class MY_Model extends CI_Model {
 			$this->_joins($join);
 		}
 
-		$this->db->where("$this->table.$this->p_key", $id);
+		$this->db->where("$this->TABLE.$this->PKEY", $id);
 
-		$q = $this->db->get($this->table);
+		$q = $this->db->get($this->TABLE);
 
 		return $q;
 	}
@@ -47,7 +47,7 @@ class MY_Model extends CI_Model {
 			$this->_joins($join);
 		}
 
-		$q = $this->db->get($this->table);
+		$q = $this->db->get($this->TABLE);
 
 		return $q;
 	}
@@ -65,9 +65,9 @@ class MY_Model extends CI_Model {
 			$this->_joins($_joins);
 		}
 
-		$this->db->where("$this->table.$key", $val);
+		$this->db->where("$this->TABLE.$key", $val);
 
-		$q = $this->db->get($this->table);
+		$q = $this->db->get($this->TABLE);
 
 		return $q;
 	}
@@ -79,9 +79,9 @@ class MY_Model extends CI_Model {
 	 */
 	public function delete($id = 0)
 	{
-		$this->db->where($this->p_key, $id);
+		$this->db->where($this->PKEY, $id);
 
-		$this->db->delete($this->table);
+		$this->db->delete($this->TABLE);
 
         return $this->db->affected_rows() > 0 ? true : false;
 	}
@@ -101,7 +101,7 @@ class MY_Model extends CI_Model {
 
     public function insert($data)
     {
-        $this->db->insert($this->table, $data);
+        $this->db->insert($this->TABLE, $data);
 
         $id = $this->db->insert_id();
 
@@ -110,9 +110,9 @@ class MY_Model extends CI_Model {
 
     public function update($id, $data)
     {
-        $this->db->where($this->p_key, $id);
+        $this->db->where($this->PKEY, $id);
 
-        $this->db->update($this->table, $data);
+        $this->db->update($this->TABLE, $data);
 
         return $this->db->affected_rows() > 0 ? $id : false;
     }
@@ -129,7 +129,7 @@ class MY_Model extends CI_Model {
 	private function _joins($tables = array())
 	{
 		foreach ($tables as $key => $value) {
-			$this->db->join($key, "$key.$value = $this->table.$this->p_key");
+			$this->db->join($key, "$key.$value = $this->TABLE.$this->PKEY");
 		}
 	}
 
@@ -143,7 +143,7 @@ class MY_Model extends CI_Model {
 
 		$table = plural(strstr($model, '_', true));
 
-		$this->table = $table;
+		$this->TABLE = $table;
 	}
 
 	/*
@@ -159,7 +159,7 @@ class MY_Model extends CI_Model {
 
 	public function order_by($key = '', $direction = 'asc')
 	{
-		$this->db->order_by("$this->table.$key", "$direction");
+		$this->db->order_by("$this->TABLE.$key", "$direction");
 
 		return $this;
 	}
